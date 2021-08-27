@@ -12,6 +12,7 @@ const ItemsAppBar = () => {
     return (
         <Appbar.Header>
             <Appbar.Content title="Items"/>
+            <Appbar.Action icon="plus" onPress={() => {}}></Appbar.Action>
         </Appbar.Header>
     );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -9,13 +9,26 @@ import TabStack from './Tab';
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
+    const [splashed, setSplashed] = useState(false);
+    const [authed, setAuthed] = useState(false);
+
     return (
         <Stack.Navigator initialRouteName="Splash" screenOptions={
-            {headerShown: false}
+            { headerShown: false }
         }>
-            <Stack.Screen name="Splash" component={Splash} />
-            <Stack.Screen name="LoginStack" component={LoginStack} />
-            <Stack.Screen name="TabStack" component={TabStack} />
+            {splashed?
+                authed?(<>
+                    <Stack.Screen name="TabStack" component={TabStack} />
+                </>):(<>
+                    <Stack.Screen name="LoginStack">
+                        {() => (<LoginStack setAuthed={setAuthed} />)}
+                    </Stack.Screen>
+                </>)
+            :(<>
+                <Stack.Screen name="Splash">
+                    {() => (<Splash setSplashed={setSplashed} />)}
+                </Stack.Screen>           
+            </>)}
         </Stack.Navigator>
     );
 };

@@ -4,11 +4,11 @@ import { useFocusEffect } from "@react-navigation/core";
 import { Center } from "react-native-layout-components";
 import { Title } from "react-native-paper";
 
-const Splash = ({navigation}) => {
+const Splash = ({setSplashed}) => {
     useFocusEffect(
         React.useCallback(() => {
             const task = InteractionManager.runAfterInteractions(() => {
-                setTimeout(() => {navigation.navigate("LoginStack")}, 1000);
+                setTimeout(() => {setSplashed(true)}, 1000);
             });
 
             return () => task.cancel();

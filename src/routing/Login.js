@@ -7,12 +7,14 @@ import Register from '../ui/screens/Register';
 
 const Stack = createNativeStackNavigator();
 
-const LoginStack = () => {
+const LoginStack = ({setAuthed}) => {
     return (
         <Stack.Navigator initialRouteName="Login" screenOptions={
             {headerShown: false}
         }>
-            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Login">
+                {({navigation}) => (<Login navigation={navigation} setAuthed={setAuthed} />)}
+            </Stack.Screen>
             <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
     );

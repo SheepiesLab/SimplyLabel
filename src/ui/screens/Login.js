@@ -5,7 +5,7 @@ import { Center, Container, Row, Column } from "react-native-layout-components";
 import { Card, TextInput, Button, Divider } from "react-native-paper";
 import { BackgroundColor } from "jest-matcher-utils/node_modules/chalk";
 
-const Login = ({ navigation }) => {
+const Login = ({ navigation, setAuthed }) => {
     return (
         <SafeAreaView style={{
             width: "100%",
@@ -21,7 +21,7 @@ const Login = ({ navigation }) => {
                     <TextInput label="Password" mode="outlined" textContentType="password" secureTextEntry={true} /><Divider />
                 </Card.Content>
                 <Card.Actions>
-                    <Button onPress={() => { navigation.navigate("TabStack") }}>Login</Button>
+                    <Button onPress={() => { setAuthed(true) }}>Login</Button>
                     <Button onPress={() => { navigation.navigate("Register") }}>Register</Button>
                 </Card.Actions>
             </Card>
