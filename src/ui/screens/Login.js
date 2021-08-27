@@ -21,7 +21,7 @@ const Login = ({ navigation }) => {
                     <TextInput label="Password" mode="outlined" textContentType="password" secureTextEntry={true} /><Divider />
                 </Card.Content>
                 <Card.Actions>
-                    <Button onPress={() => { }}>Login</Button>
+                    <Button onPress={() => { navigation.navigate("TabStack") }}>Login</Button>
                     <Button onPress={() => { navigation.navigate("Register") }}>Register</Button>
                 </Card.Actions>
             </Card>

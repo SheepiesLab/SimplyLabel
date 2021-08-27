@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Splash from '../ui/screens/Splash';
 import LoginStack from './Login';
+import TabStack from './Tab';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ const MainStack = () => {
         }>
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="LoginStack" component={LoginStack} />
+            <Stack.Screen name="TabStack" component={TabStack} />
         </Stack.Navigator>
     );
 };
