@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { useColorScheme } from 'react-native';
+import {useColorScheme} from 'react-native';
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -43,8 +43,10 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <PaperProvider theme={isDarkMode?CombinedDarkTheme:CombinedDefaultTheme}>
-      <NavigationContainer theme={isDarkMode?CombinedDarkTheme:CombinedDefaultTheme}>
+    <PaperProvider
+      theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
+      <NavigationContainer
+        theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
         <MainStack />
       </NavigationContainer>
     </PaperProvider>

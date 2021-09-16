@@ -1,19 +1,17 @@
-import React from "react";
-import { View } from "react-native";
-import { Appbar } from "react-native-paper";
+import React from 'react';
+import {View} from 'react-native';
+import {Appbar} from 'react-native-paper';
 
 const Search = () => {
-    return (
-    <View></View>
-    );
+  return <View />;
 };
 
 const SearchAppBar = () => {
-    return (
-        <Appbar.Header>
-            <Appbar.Content title="Search"/>
-        </Appbar.Header>
-    );
+  return (
+    <Appbar.Header>
+      <Appbar.Content title="Search" />
+    </Appbar.Header>
+  );
 };
 
 export {Search, SearchAppBar};
