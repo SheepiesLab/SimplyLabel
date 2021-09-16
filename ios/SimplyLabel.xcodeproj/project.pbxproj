@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		4CAEBDCB4507E53A20BA3E30 /* libPods-SimplyLabel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEC4EB82EF87E117E6E1B94 /* libPods-SimplyLabel.a */; };
+		53F66A1126F2EC580080B608 /* ForceBridgingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F66A1026F2EC580080B608 /* ForceBridgingHeader.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8E1E5FDC914016739BDEE795 /* libPods-SimplyLabel-SimplyLabelTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B1627EC7753DAD2A373A48 /* libPods-SimplyLabel-SimplyLabelTests.a */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SimplyLabel/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SimplyLabel/main.m; sourceTree = "<group>"; };
 		5069F0EC9CCBBBA06AC7CE18 /* Pods-SimplyLabel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplyLabel.debug.xcconfig"; path = "Target Support Files/Pods-SimplyLabel/Pods-SimplyLabel.debug.xcconfig"; sourceTree = "<group>"; };
+		53F66A0F26F2EC570080B608 /* SimplyLabel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplyLabel-Bridging-Header.h"; sourceTree = "<group>"; };
+		53F66A1026F2EC580080B608 /* ForceBridgingHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForceBridgingHeader.swift; path = SimplyLabel/ForceBridgingHeader.swift; sourceTree = "<group>"; };
 		65B1627EC7753DAD2A373A48 /* libPods-SimplyLabel-SimplyLabelTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SimplyLabel-SimplyLabelTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EEC4EB82EF87E117E6E1B94 /* libPods-SimplyLabel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SimplyLabel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SimplyLabel/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				53F66A1026F2EC580080B608 /* ForceBridgingHeader.swift */,
+				53F66A0F26F2EC570080B608 /* SimplyLabel-Bridging-Header.h */,
 			);
 			name = SimplyLabel;
 			sourceTree = "<group>";
@@ -114,7 +119,6 @@
 				8D96C7E2816D0B268428B473 /* Pods-SimplyLabel-SimplyLabelTests.debug.xcconfig */,
 				9A5A149468F3F2C5C1CFC94F /* Pods-SimplyLabel-SimplyLabelTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -208,7 +212,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -263,7 +267,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "set -e\n\nexport NODE_BINARY=/opt/homebrew/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		09DF31409FD5D08968FC7DCE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -411,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F66A1126F2EC580080B608 /* ForceBridgingHeader.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -431,7 +436,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8D96C7E2816D0B268428B473 /* Pods-SimplyLabel-SimplyLabelTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = WSKHCF84AF;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -458,8 +465,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A5A149468F3F2C5C1CFC94F /* Pods-SimplyLabel-SimplyLabelTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = WSKHCF84AF;
 				INFOPLIST_FILE = SimplyLabelTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -485,7 +494,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WSKHCF84AF;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = SimplyLabel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,6 +509,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SimplyLabel;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplyLabel-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -511,6 +523,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WSKHCF84AF;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = SimplyLabel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -523,6 +537,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SimplyLabel;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplyLabel-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
