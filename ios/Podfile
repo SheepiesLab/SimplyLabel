@@ -32,4 +32,10 @@ target 'SimplyLabel' do
     flipper_post_install(installer)
     react_native_post_install(installer)
   end
+
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+    'TextDetector',
+    'BarcodeDetectorMLKit'
+  ]
 end
+
