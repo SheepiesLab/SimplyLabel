@@ -18,6 +18,8 @@ import {
   DefaultTheme as PaperDefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
+import store from './src/states/store';
+import {Provider} from 'react-redux';
 
 import MainStack from './src/routing/Main';
 
@@ -43,13 +45,15 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <PaperProvider
-      theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
-      <NavigationContainer
+    <Provider store={store}>
+      <PaperProvider
         theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
-        <MainStack />
-      </NavigationContainer>
-    </PaperProvider>
+        <NavigationContainer
+          theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
+          <MainStack />
+        </NavigationContainer>
+      </PaperProvider>
+    </Provider>
   );
 };
 
