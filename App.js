@@ -8,53 +8,35 @@
 
 import React from 'react';
 import {useColorScheme} from 'react-native';
-import {
-  NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-import {
-  DarkTheme as PaperDarkTheme,
-  DefaultTheme as PaperDefaultTheme,
-  Provider as PaperProvider,
-} from 'react-native-paper';
+import {NavigationContainer} from '@react-navigation/native';
+import {Provider as PaperProvider} from 'react-native-paper';
 import store from './src/states/store';
-import {Provider} from 'react-redux';
+import {Provider, useSelector, useDispatch} from 'react-redux';
+import {CombinedDarkTheme, CombinedDefaultTheme} from './src/utils/theme';
+import {setTheme} from './src/states/AppSlice';
 
 import MainStack from './src/routing/Main';
 
-const CombinedDefaultTheme = {
-  ...PaperDefaultTheme,
-  ...NavigationDefaultTheme,
-  colors: {
-    ...PaperDefaultTheme.colors,
-    ...NavigationDefaultTheme.colors,
-  },
-};
-
-const CombinedDarkTheme = {
-  ...PaperDarkTheme,
-  ...NavigationDarkTheme,
-  colors: {
-    ...PaperDarkTheme.colors,
-    ...NavigationDarkTheme.colors,
-  },
-};
-
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const dispatch = useDispatch();
+  dispatch(setTheme(isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme));
+  return <MainStack />;
+};
+
+const Wrappers = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+  const theme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
 
   return (
     <Provider store={store}>
-      <PaperProvider
-        theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
-        <NavigationContainer
-          theme={isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}>
-          <MainStack />
+      <PaperProvider theme={theme}>
+        <NavigationContainer theme={theme}>
+          <App />
         </NavigationContainer>
       </PaperProvider>
     </Provider>
   );
 };
 
-export default App;
+export default Wrappers;

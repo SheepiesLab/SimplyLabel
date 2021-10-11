@@ -3,6 +3,12 @@ import {View} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Items, ItemsAppBar} from '../ui/screens/Items';
+import {AddItem, AddItemAppBar} from '../ui/screens/AddItem';
+import {
+  SelectContainer,
+  SelectContainerAppBar,
+} from '../ui/screens/SelectContainer';
+import {AddContainer, AddContainerAppBar} from '../ui/screens/AddContainer';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +20,27 @@ const ItemsStack = () => {
         component={Items}
         options={{
           header: ItemsAppBar,
+        }}
+      />
+      <Stack.Screen
+        name="AddItem"
+        component={AddItem}
+        options={{
+          header: AddItemAppBar,
+        }}
+      />
+      <Stack.Screen
+        name="AddContainer"
+        component={AddContainer}
+        options={{
+          header: AddContainerAppBar,
+        }}
+      />
+      <Stack.Screen
+        name="SelectContainer"
+        component={SelectContainer}
+        options={{
+          header: SelectContainerAppBar,
         }}
       />
     </Stack.Navigator>
