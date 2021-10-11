@@ -1,9 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Center, Container, Row, Column} from 'react-native-layout-components';
 import {Card, TextInput, Button, Divider} from 'react-native-paper';
-import {BackgroundColor} from 'jest-matcher-utils/node_modules/chalk';
 
 const Login = ({navigation, setAuthed}) => {
   return (

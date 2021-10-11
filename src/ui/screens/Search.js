@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {useIsFocused} from '@react-navigation/core';

@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Splash from '../ui/screens/Splash';

@@ -1,5 +1,4 @@
 import React from 'react';
-import {View} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Items, ItemsAppBar} from '../ui/screens/Items';
@@ -8,7 +7,7 @@ import {
   SelectContainer,
   SelectContainerAppBar,
 } from '../ui/screens/SelectContainer';
-import {AddContainer, AddContainerAppBar} from '../ui/screens/AddContainer';
+import {AddContainerStack, AddContainerAppBar} from './AddContainer';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,9 +30,10 @@ const ItemsStack = () => {
       />
       <Stack.Screen
         name="AddContainer"
-        component={AddContainer}
+        component={AddContainerStack}
         options={{
           header: AddContainerAppBar,
+          headerShown: false,
         }}
       />
       <Stack.Screen

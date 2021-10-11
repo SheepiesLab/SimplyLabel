@@ -1,6 +1,5 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Provider, useSelector, useDispatch} from 'react-redux';
 import {Appbar, Menu} from 'react-native-paper';
 
 const Items = () => {
@@ -13,8 +12,6 @@ const ItemsAppBar = ({navigation}) => {
   const openMenu = () => setVisible(true);
 
   const closeMenu = () => setVisible(false);
-
-  const theme = useSelector(state => state.app.theme);
 
   return (
     <Appbar.Header>
