@@ -7,6 +7,7 @@ const emptyShadow = {
   description: '',
   container: '',
   isVirtual: false,
+  containing: [],
 };
 
 export const itemsSlice = createSlice({
