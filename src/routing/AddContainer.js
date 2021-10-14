@@ -2,8 +2,8 @@ import React from 'react';
 import {View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AddItem, AddContainerItemAppBar} from '../ui/screens/AddItem';
-import {PackItem, PackItemAppBar} from '../ui/screens/PackItem';
+import {PackItems, PackItemsAppBar} from '../ui/screens/PackItems';
+import {Item, AddContainerItemAppBar} from '../ui/screens/Item';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +12,7 @@ const AddContainerStack = ({navigation: currentNavigation}) => {
     <Tab.Navigator backBehavior="order" tabBar={() => <View />}>
       <Tab.Screen
         name="ContainerInfo"
-        component={AddItem}
+        component={Item}
         options={{
           tabBarLabel: 'Container Info',
           tabBarIcon: ({focused, color}) =>
@@ -25,8 +25,8 @@ const AddContainerStack = ({navigation: currentNavigation}) => {
         }}
       />
       <Tab.Screen
-        name="AddItemsToContainer"
-        component={PackItem}
+        name="PackItems"
+        component={PackItems}
         options={{
           tabBarLabel: 'Add Items',
           tabBarIcon: ({focused, color}) =>
@@ -36,7 +36,7 @@ const AddContainerStack = ({navigation: currentNavigation}) => {
               <Icon name="numeric-2-circle-outline" color={color} size={24} />
             ),
           header: ({navigation}) => (
-            <PackItemAppBar
+            <PackItemsAppBar
               navigation={navigation}
               parentNavigation={currentNavigation}
             />

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 
 const styles = StyleSheet.create({
@@ -73,7 +73,8 @@ const Camera = ({onChangeText, isFocused}) => {
                   flex: 0,
                   flexDirection: 'row',
                   justifyContent: 'center',
-                }}/>
+                }}
+              />
             );
           }}
         </RNCamera>

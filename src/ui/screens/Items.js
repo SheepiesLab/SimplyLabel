@@ -1,12 +1,40 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Appbar, Menu} from 'react-native-paper';
+import {ScrollView} from 'react-native';
+import {Appbar, Menu, List} from 'react-native-paper';
 
-const Items = () => {
-  return <View />;
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  shadowItem,
+  emptyShadowItem,
+  setEditMode,
+} from '../../states/ItemsSlice';
+
+const Items = ({navigation}) => {
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.items.entries);
+  let itemComponents = [];
+  for (const k in items) {
+    if (k === 'shadow') {
+      continue;
+    }
+    itemComponents.push(
+      <List.Item
+        title={items[k].name}
+        description={items[k].label}
+        onPress={() => {
+          dispatch(setEditMode(false));
+          dispatch(shadowItem(items[k]));
+          navigation.navigate('Item', k);
+        }}
+      />,
+    );
+  }
+
+  return <ScrollView>{itemComponents}</ScrollView>;
 };
 
 const ItemsAppBar = ({navigation}) => {
+  const dispatch = useDispatch();
   const [visible, setVisible] = React.useState(false);
 
   const openMenu = () => setVisible(true);
@@ -23,14 +51,21 @@ const ItemsAppBar = ({navigation}) => {
         <Menu.Item
           onPress={() => {
             closeMenu();
-            navigation.navigate('AddItem');
+            dispatch(setEditMode(true));
+            dispatch(emptyShadowItem());
+            navigation.navigate('Item', 'shadow');
           }}
           title="Add Item"
         />
         <Menu.Item
           onPress={() => {
             closeMenu();
-            navigation.navigate('AddContainer');
+            dispatch(setEditMode(true));
+            dispatch(emptyShadowItem());
+            navigation.navigate('AddContainer', {
+              screen: 'ContainerInfo',
+              params: 'shadow',
+            });
           }}
           title="Add Container"
         />

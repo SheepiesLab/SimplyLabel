@@ -1,17 +1,25 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 import {Appbar, RadioButton} from 'react-native-paper';
+import {useSelector, useDispatch} from 'react-redux';
+import {shadowItem} from '../../states/ItemsSlice';
 
-const SelectContainer = ({navigation, route}) => {
-  const {value, setValue} = route.params;
+const SelectContainer = ({navigation}) => {
+  const shadow = useSelector(state => state.items.entries.shadow);
+  const dispatch = useDispatch();
   return (
     <ScrollView>
       <RadioButton.Group
         onValueChange={v => {
-          setValue(v);
-          navigation.goBack();
+          dispatch(
+            shadowItem({
+              ...shadow,
+              container: v,
+            }),
+          );
         }}
-        value={value}>
+        value={shadow.container}>
+        <RadioButton.Item label="No Container" value="" />
         <RadioButton.Item label="Placeholder Container 1" value="first" />
         <RadioButton.Item label="Placeholder Container 2" value="second" />
         <RadioButton.Item label="Placeholder Container 3" value="third" />

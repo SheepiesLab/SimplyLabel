@@ -5,7 +5,7 @@ import {Appbar} from 'react-native-paper';
 import {useIsFocused} from '@react-navigation/core';
 import Camera from '../components/Camera';
 
-const PackItem = ({navigation}) => {
+const PackItems = ({navigation}) => {
   const isFocused = useIsFocused();
   return (
     <View
@@ -21,7 +21,7 @@ const PackItem = ({navigation}) => {
   );
 };
 
-const PackItemAppBar = ({navigation, parentNavigation}) => {
+const PackItemsAppBar = ({navigation, parentNavigation}) => {
   return (
     <Appbar.Header>
       <Appbar.Action
@@ -30,7 +30,7 @@ const PackItemAppBar = ({navigation, parentNavigation}) => {
           navigation.goBack();
         }}
       />
-      <Appbar.Content title="Pack Item" />
+      <Appbar.Content title="Pack Items" />
       <Appbar.Action
         icon="check"
         onPress={() => {
@@ -41,4 +41,4 @@ const PackItemAppBar = ({navigation, parentNavigation}) => {
   );
 };
 
-export {PackItem, PackItemAppBar};
+export {PackItems, PackItemsAppBar};

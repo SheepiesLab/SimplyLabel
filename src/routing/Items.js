@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Items, ItemsAppBar} from '../ui/screens/Items';
+import {Item, ItemAppBar} from '../ui/screens/Item';
 import {AddItem, AddItemAppBar} from '../ui/screens/AddItem';
 import {
   SelectContainer,
@@ -22,10 +23,10 @@ const ItemsStack = () => {
         }}
       />
       <Stack.Screen
-        name="AddItem"
-        component={AddItem}
+        name="Item"
+        component={Item}
         options={{
-          header: AddItemAppBar,
+          header: ItemAppBar,
         }}
       />
       <Stack.Screen
