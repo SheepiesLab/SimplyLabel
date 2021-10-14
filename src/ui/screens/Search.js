@@ -18,21 +18,29 @@ const Search = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
-      <Camera onChangeText={cameraSetSearchText} isFocused={isFocused} />
-      <TextInput
-        label="Label or Name"
-        onChangeText={t => setSearchText(t)}
-        value={searchText}
-        onFocus={() => {
-          setTextInputFocus(true);
-        }}
-        onBlur={() => {
-          setTextInputFocus(false);
-        }}
-      />
-      <Text>{searchText}</Text>
-      <Text>{textInputFocus ? 'text' : 'camera'}</Text>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+      }}>
+      <View style={{flex: 1}}>
+        <Camera onChangeText={cameraSetSearchText} isFocused={isFocused} />
+      </View>
+      <View style={{flex: 3}}>
+        <TextInput
+          label="Label or Name"
+          onChangeText={t => setSearchText(t)}
+          value={searchText}
+          onFocus={() => {
+            setTextInputFocus(true);
+          }}
+          onBlur={() => {
+            setTextInputFocus(false);
+          }}
+        />
+        <Text>{searchText}</Text>
+        <Text>{textInputFocus ? 'text' : 'camera'}</Text>
+      </View>
     </View>
   );
 };

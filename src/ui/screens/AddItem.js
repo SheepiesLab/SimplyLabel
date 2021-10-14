@@ -1,5 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
+import {TabActions} from '@react-navigation/native';
 import {Appbar, TextInput, Switch, List} from 'react-native-paper';
 
 const AddItem = ({navigation}) => {
@@ -46,7 +47,8 @@ const AddItem = ({navigation}) => {
 const AddItemAppBar = ({navigation}) => {
   return (
     <Appbar.Header>
-      <Appbar.BackAction
+      <Appbar.Action
+        icon="chevron-left"
         onPress={() => {
           navigation.goBack();
         }}
@@ -62,4 +64,24 @@ const AddItemAppBar = ({navigation}) => {
   );
 };
 
-export {AddItem, AddItemAppBar};
+const AddContainerItemAppBar = ({navigation}) => {
+  return (
+    <Appbar.Header>
+      <Appbar.Action
+        icon="chevron-left"
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
+      <Appbar.Content title="Container Info" />
+      <Appbar.Action
+        icon="chevron-right"
+        onPress={() => {
+          navigation.dispatch(TabActions.jumpTo('AddItemsToContainer'));
+        }}
+      />
+    </Appbar.Header>
+  );
+};
+
+export {AddItem, AddItemAppBar, AddContainerItemAppBar};

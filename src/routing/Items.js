@@ -7,7 +7,7 @@ import {
   SelectContainer,
   SelectContainerAppBar,
 } from '../ui/screens/SelectContainer';
-import {AddContainerStack, AddContainerAppBar} from './AddContainer';
+import {AddContainerStack} from './AddContainer';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +32,6 @@ const ItemsStack = () => {
         name="AddContainer"
         component={AddContainerStack}
         options={{
-          header: AddContainerAppBar,
           headerShown: false,
         }}
       />

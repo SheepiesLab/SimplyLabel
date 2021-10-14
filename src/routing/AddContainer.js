@@ -2,14 +2,12 @@ import React from 'react';
 import {View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Appbar} from 'react-native-paper';
-
-import {AddItem, AddItemAppBar} from '../ui/screens/AddItem';
-import {AddItemToContainer, AddItemToContainerAppBar} from '../ui/screens/AddItemToContainer';
+import {AddItem, AddContainerItemAppBar} from '../ui/screens/AddItem';
+import {PackItem, PackItemAppBar} from '../ui/screens/PackItem';
 
 const Tab = createBottomTabNavigator();
 
-const AddContainerStack = () => {
+const AddContainerStack = ({navigation: currentNavigation}) => {
   return (
     <Tab.Navigator backBehavior="order" tabBar={() => <View />}>
       <Tab.Screen
@@ -23,12 +21,12 @@ const AddContainerStack = () => {
             ) : (
               <Icon name="numeric-1-circle-outline" color={color} size={24} />
             ),
-          header: AddItemAppBar,
+          header: AddContainerItemAppBar,
         }}
       />
       <Tab.Screen
         name="AddItemsToContainer"
-        component={AddItemToContainer}
+        component={PackItem}
         options={{
           tabBarLabel: 'Add Items',
           tabBarIcon: ({focused, color}) =>
@@ -37,30 +35,16 @@ const AddContainerStack = () => {
             ) : (
               <Icon name="numeric-2-circle-outline" color={color} size={24} />
             ),
-          header: AddItemToContainerAppBar,
+          header: ({navigation}) => (
+            <PackItemAppBar
+              navigation={navigation}
+              parentNavigation={currentNavigation}
+            />
+          ),
         }}
       />
     </Tab.Navigator>
   );
 };
 
-const AddContainerAppBar = ({navigation}) => {
-  return (
-    <Appbar.Header>
-      <Appbar.BackAction
-        onPress={() => {
-          navigation.goBack();
-        }}
-      />
-      <Appbar.Content title="Add Container" />
-      <Appbar.Action
-        icon="check"
-        onPress={() => {
-          navigation.goBack();
-        }}
-      />
-    </Appbar.Header>
-  );
-};
-
-export {AddContainerStack, AddContainerAppBar};
+export {AddContainerStack};

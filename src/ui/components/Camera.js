@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    height: 300,
   },
   capture: {
     flex: 0,
@@ -41,7 +40,7 @@ const PendingView = () => (
 const Camera = ({onChangeText, isFocused}) => {
   if (isFocused) {
     return (
-      <View style={{height: 300}}>
+      <View style={styles.container}>
         <RNCamera
           style={styles.preview}
           captureAudio={false}
@@ -74,11 +73,7 @@ const Camera = ({onChangeText, isFocused}) => {
                   flex: 0,
                   flexDirection: 'row',
                   justifyContent: 'center',
-                }}>
-                <TouchableOpacity onPress={() => {}} style={styles.capture}>
-                  <Text style={{fontSize: 14}}> SNAP </Text>
-                </TouchableOpacity>
-              </View>
+                }}/>
             );
           }}
         </RNCamera>
