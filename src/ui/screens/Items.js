@@ -4,7 +4,7 @@ import {Appbar, List} from 'react-native-paper';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {
-  shadowItem,
+  setShadowItem,
   emptyShadowItem,
   setEditMode,
 } from '../../states/ItemsSlice';
@@ -22,7 +22,7 @@ const Items = ({
     itemOnPress === null
       ? k => () => {
           dispatch(setEditMode(false));
-          dispatch(shadowItem(items[k]));
+          dispatch(setShadowItem(k));
           navigation.navigate('Item', k);
         }
       : itemOnPress;
@@ -65,6 +65,7 @@ const Items = ({
     }
     itemComponents.push(
       <List.Item
+        key={k}
         title={items[k].name}
         description={items[k].label}
         onPress={itemOnPress(k)}
