@@ -2,7 +2,7 @@
 import React from 'react';
 import {Appbar} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
-import {shadowItemAddContaining} from '../../states/ItemsSlice';
+import {setShadowItemAddContaining} from '../../states/ItemsSlice';
 import {Search} from './Search';
 
 const PackItem = ({navigation}) => {
@@ -12,7 +12,7 @@ const PackItem = ({navigation}) => {
   return (
     <Search
       itemOnPress={k => () => {
-        dispatch(shadowItemAddContaining(k));
+        dispatch(setShadowItemAddContaining(k));
         navigation.goBack();
       }}
     />

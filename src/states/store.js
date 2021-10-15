@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {createStore, combineReducers} from 'redux';
 import {composeWithDevTools} from 'remote-redux-devtools';
 import itemsReducer from './ItemsSlice';
 import appReducer from './AppSlice';

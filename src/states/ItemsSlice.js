@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { act } from 'react-test-renderer';
 import {v4 as uuid} from 'uuid';
 
 const emptyShadow = {
@@ -21,10 +20,10 @@ export const itemsSlice = createSlice({
     shadowInContainerItemList: [],
   },
   reducers: {
-    shadowItem: (state, action) => {
+    setShadowItem: (state, action) => {
       state.entries.shadow = action.payload;
     },
-    setShadowItem: (state, action) => {
+    shadowItem: (state, action) => {
       if (action.payload === 'shadow') {
         state.entries.shadow = emptyShadow;
         state.shadowInContainerItemList = [];
@@ -61,8 +60,8 @@ export const itemsSlice = createSlice({
 });
 
 export const {
-  shadowItem,
   setShadowItem,
+  shadowItem,
   shadowItemAddContaining,
   emptyShadowItem,
   commitShadowItem,

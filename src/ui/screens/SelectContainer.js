@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView} from 'react-native';
 import {Appbar, RadioButton} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
-import {shadowItem} from '../../states/ItemsSlice';
+import {setShadowItem} from '../../states/ItemsSlice';
 
 const SelectContainer = () => {
   const shadow = useSelector(state => state.items.entries.shadow);
@@ -12,7 +12,7 @@ const SelectContainer = () => {
       <RadioButton.Group
         onValueChange={v => {
           dispatch(
-            shadowItem({
+            setShadowItem({
               ...shadow,
               container: v,
             }),

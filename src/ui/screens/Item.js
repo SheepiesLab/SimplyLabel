@@ -3,7 +3,7 @@ import {View, ScrollView} from 'react-native';
 import {Appbar, TextInput, Switch, List, Divider} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
 import {
-  shadowItem,
+  setShadowItem,
   emptyShadowItem,
   commitShadowItem,
   updateItem,
@@ -25,7 +25,7 @@ const Item = ({navigation, route}) => {
         value={shadow.label}
         onChangeText={t =>
           dispatch(
-            shadowItem({
+            setShadowItem({
               ...shadow,
               label: t,
             }),
@@ -38,7 +38,7 @@ const Item = ({navigation, route}) => {
         value={shadow.name}
         onChangeText={t =>
           dispatch(
-            shadowItem({
+            setShadowItem({
               ...shadow,
               name: t,
             }),
@@ -51,7 +51,7 @@ const Item = ({navigation, route}) => {
         value={shadow.description}
         onChangeText={t =>
           dispatch(
-            shadowItem({
+            setShadowItem({
               ...shadow,
               description: t,
             }),
@@ -78,7 +78,7 @@ const Item = ({navigation, route}) => {
             value={shadow.isVirtual}
             onValueChange={t =>
               dispatch(
-                shadowItem({
+                setShadowItem({
                   ...shadow,
                   isVirtual: !shadow.isVirtual,
                 }),
@@ -95,7 +95,7 @@ const Item = ({navigation, route}) => {
             value={shadow.isContainer}
             onValueChange={t =>
               dispatch(
-                shadowItem({
+                setShadowItem({
                   ...shadow,
                   isContainer: !shadow.isContainer,
                 }),
