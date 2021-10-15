@@ -38,17 +38,39 @@ export const itemsSlice = createSlice({
       }
     },
     shadowItemAddContaining: (state, action) => {
-      state.shadowInContainerItemList.push(action.payload);
+      if (!state.shadowInContainerItemList.includes(action.payload)) {
+        state.shadowInContainerItemList.push(action.payload);
+      }
+    },
+    shadowItemRemoveContaining: (state, action) => {
+      let index = state.shadowInContainerItemList.indexOf(action.payload);
+      if (index !== -1) {
+        state.shadowInContainerItemList.splice(index, 1);
+      }
     },
     emptyShadowItem: (state, action) => {
       state.entries.shadow = emptyShadow;
       state.shadowInContainerItemList = [];
     },
     commitShadowItem: (state, action) => {
-      state.entries[uuid()] = state.entries.shadow;
+      const key = uuid();
+      state.entries[key] = state.entries.shadow;
+      for (const k in state.shadowInContainerItemList) {
+        const itemKey = state.shadowInContainerItemList[k];
+        state.entries[itemKey].container = key;
+      }
+      state.entries.shadow = emptyShadow;
+      state.shadowInContainerItemList = [];
     },
     updateItem: (state, action) => {
-      state.entries[action.payload] = state.entries.shadow;
+      const key = action.payload;
+      state.entries[key] = state.entries.shadow;
+      for (const k in state.shadowInContainerItemList) {
+        const itemKey = state.shadowInContainerItemList[k];
+        state.entries[itemKey].container = key;
+      }
+      state.entries.shadow = emptyShadow;
+      state.shadowInContainerItemList = [];
     },
     deleteItem: (state, action) => {
       delete state.entries[action.payload];
@@ -63,6 +85,7 @@ export const {
   setShadowItem,
   shadowItem,
   shadowItemAddContaining,
+  shadowItemRemoveContaining,
   emptyShadowItem,
   commitShadowItem,
   updateItem,
