@@ -49,7 +49,11 @@ const Search = ({navigation}) => {
             setTextInputFocus(false);
           }}
         />
-        <Items navigation={navigation} searchLabel={searchText} />
+        <Items
+          navigation={navigation}
+          searchLabel={searchText}
+          exactMatch={!textInputFocus}
+        />
       </View>
     </View>
   );

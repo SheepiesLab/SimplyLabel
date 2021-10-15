@@ -9,7 +9,7 @@ import {
   setEditMode,
 } from '../../states/ItemsSlice';
 
-const Items = ({navigation, searchLabel = ''}) => {
+const Items = ({navigation, searchLabel = '', exactMatch = false}) => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.items.entries);
   let itemComponents = [];
@@ -17,14 +17,33 @@ const Items = ({navigation, searchLabel = ''}) => {
     if (k === 'shadow') {
       continue;
     }
-    const itemLabel = items[k].label.toLowerCase();
-    const itemName = items[k].name.toLowerCase().replace(/\s/g, '');
-    searchLabel = searchLabel.toLowerCase();
+    const itemLabel = items[k].label
+      .toLowerCase()
+      .replace(/\s/g, '')
+      .replace('i', '1')
+      .replace('l', '1')
+      .replace('o', '0');
+    const itemName = items[k].name
+      .toLowerCase()
+      .replace(/\s/g, '')
+      .replace('i', '1')
+      .replace('l', '1')
+      .replace('0', 'o');
+    searchLabel = searchLabel
+      .toLowerCase()
+      .replace(/\s/g, '')
+      .replace('i', '1')
+      .replace('l', '1')
+      .replace('0', 'o');
     if (
       searchLabel !== '' &&
+      !exactMatch &&
       !itemLabel.includes(searchLabel) &&
       !itemName.includes(searchLabel)
     ) {
+      continue;
+    }
+    if (searchLabel !== '' && exactMatch && itemLabel !== searchLabel) {
       continue;
     }
     itemComponents.push(
