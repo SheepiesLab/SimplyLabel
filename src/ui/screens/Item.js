@@ -1,7 +1,6 @@
 import React from 'react';
-import {View} from 'react-native';
-import {TabActions} from '@react-navigation/native';
-import {Appbar, TextInput, Switch, List} from 'react-native-paper';
+import {View, ScrollView} from 'react-native';
+import {Appbar, TextInput, Switch, List, Divider} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
 import {
   shadowItem,
@@ -9,15 +8,18 @@ import {
   commitShadowItem,
   updateItem,
   setEditMode,
+  deleteItem,
 } from '../../states/ItemsSlice';
+import {Items} from './Items';
 
-const Item = ({navigation}) => {
+const Item = ({navigation, route}) => {
   const dispatch = useDispatch();
   const shadow = useSelector(state => state.items.entries.shadow);
   const editMode = useSelector(state => state.items.itemScreenInEdit);
+  const itemKey = route.params;
 
   return (
-    <View>
+    <ScrollView>
       <TextInput
         label="Label"
         value={shadow.label}
@@ -60,8 +62,8 @@ const Item = ({navigation}) => {
         editable={editMode}
       />
       <List.Item
-        title="In Container"
-        description={shadow.container}
+        title={shadow.container}
+        description="In Container"
         right={() => <List.Icon color="#000" icon="chevron-right" />}
         onPress={() => {
           if (editMode) {
@@ -86,7 +88,41 @@ const Item = ({navigation}) => {
           />
         )}
       />
-    </View>
+      <List.Item
+        title="Is Container"
+        right={props => (
+          <Switch
+            value={shadow.isContainer}
+            onValueChange={t =>
+              dispatch(
+                shadowItem({
+                  ...shadow,
+                  isContainer: !shadow.isContainer,
+                }),
+              )
+            }
+            disabled={!editMode}
+          />
+        )}
+      />
+      <Divider />
+      {shadow.isContainer && editMode && (
+        <View>
+          <List.Item
+            title="Pack More Items"
+            description={shadow.containing.length}
+            right={() => <List.Icon color="#000" icon="chevron-right" />}
+            onPress={() => {
+              if (editMode) {
+                navigation.navigate('PackItems');
+              }
+            }}
+          />
+          <Divider />
+        </View>
+      )}
+      <Items inContainer={itemKey} />
+    </ScrollView>
   );
 };
 
@@ -98,13 +134,24 @@ const ItemAppBar = ({navigation, route}) => {
 
   return (
     <Appbar.Header>
-      <Appbar.Action
-        icon="chevron-left"
-        onPress={() => {
-          dispatch(emptyShadowItem());
-          navigation.goBack();
-        }}
-      />
+      {!editMode && (
+        <Appbar.Action
+          icon="chevron-left"
+          onPress={() => {
+            dispatch(emptyShadowItem());
+            navigation.goBack();
+          }}
+        />
+      )}
+      {editMode && (
+        <Appbar.Action
+          icon="delete"
+          onPress={() => {
+            navigation.goBack();
+            dispatch(deleteItem(itemKey));
+          }}
+        />
+      )}
       <Appbar.Content title={itemKey === 'shadow' ? 'Add Item' : item.name} />
       {(itemKey === 'shadow' || editMode) && (
         <Appbar.Action
@@ -132,26 +179,4 @@ const ItemAppBar = ({navigation, route}) => {
   );
 };
 
-const AddContainerItemAppBar = ({navigation}) => {
-  const dispatch = useDispatch();
-  return (
-    <Appbar.Header>
-      <Appbar.Action
-        icon="chevron-left"
-        onPress={() => {
-          dispatch(emptyShadowItem());
-          navigation.goBack();
-        }}
-      />
-      <Appbar.Content title="Container Info" />
-      <Appbar.Action
-        icon="chevron-right"
-        onPress={() => {
-          navigation.dispatch(TabActions.jumpTo('PackItems'));
-        }}
-      />
-    </Appbar.Header>
-  );
-};
-
-export {Item, ItemAppBar, AddContainerItemAppBar};
+export {Item, ItemAppBar};

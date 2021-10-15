@@ -7,6 +7,7 @@ const emptyShadow = {
   description: '',
   container: '',
   isVirtual: false,
+  isContainer: false,
   containing: [],
 };
 
@@ -32,7 +33,7 @@ export const itemsSlice = createSlice({
       state.entries[action.payload] = state.entries.shadow;
     },
     deleteItem: (state, action) => {
-      state.entries[action.payload] = undefined;
+      delete state.entries[action.payload];
     },
     setEditMode: (state, action) => {
       state.itemScreenInEdit = action.payload;

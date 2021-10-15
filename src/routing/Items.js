@@ -3,12 +3,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Items, ItemsAppBar} from '../ui/screens/Items';
 import {Item, ItemAppBar} from '../ui/screens/Item';
-import {AddItem, AddItemAppBar} from '../ui/screens/AddItem';
+import {PackItems, PackItemsAppBar} from '../ui/screens/PackItems';
 import {
   SelectContainer,
   SelectContainerAppBar,
 } from '../ui/screens/SelectContainer';
-import {AddContainerStack} from './AddContainer';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,10 +29,10 @@ const ItemsStack = () => {
         }}
       />
       <Stack.Screen
-        name="AddContainer"
-        component={AddContainerStack}
+        name="PackItems"
+        component={PackItems}
         options={{
-          headerShown: false,
+          header: PackItemsAppBar,
         }}
       />
       <Stack.Screen

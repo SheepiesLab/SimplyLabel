@@ -4,7 +4,7 @@ import {Appbar, RadioButton} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
 import {shadowItem} from '../../states/ItemsSlice';
 
-const SelectContainer = ({navigation}) => {
+const SelectContainer = () => {
   const shadow = useSelector(state => state.items.entries.shadow);
   const dispatch = useDispatch();
   return (
