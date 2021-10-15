@@ -62,7 +62,7 @@ const Item = ({navigation, route}) => {
         editable={editMode}
       />
       <List.Item
-        title={shadow.container}
+        title={shadow.container === '' ? 'Not In Container' : shadow.container}
         description="In Container"
         right={() => <List.Icon color="#000" icon="chevron-right" />}
         onPress={() => {
@@ -134,7 +134,7 @@ const ItemAppBar = ({navigation, route}) => {
 
   return (
     <Appbar.Header>
-      {!editMode && (
+      {(!editMode || itemKey === 'shadow') && (
         <Appbar.Action
           icon="chevron-left"
           onPress={() => {
@@ -143,7 +143,7 @@ const ItemAppBar = ({navigation, route}) => {
           }}
         />
       )}
-      {editMode && (
+      {editMode && itemKey !== 'shadow' && (
         <Appbar.Action
           icon="delete"
           onPress={() => {
