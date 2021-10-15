@@ -9,12 +9,22 @@ import {
   setEditMode,
 } from '../../states/ItemsSlice';
 
-const Items = ({navigation}) => {
+const Items = ({navigation, searchLabel = ''}) => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.items.entries);
   let itemComponents = [];
   for (const k in items) {
     if (k === 'shadow') {
+      continue;
+    }
+    const itemLabel = items[k].label.toLowerCase();
+    const itemName = items[k].name.toLowerCase().replace(/\s/g, '');
+    searchLabel = searchLabel.toLowerCase();
+    if (
+      searchLabel !== '' &&
+      !itemLabel.includes(searchLabel) &&
+      !itemName.includes(searchLabel)
+    ) {
       continue;
     }
     itemComponents.push(

@@ -76,7 +76,9 @@ const Camera = ({onChangeText, isFocused}) => {
                 }
               }
             }
-            onChangeText(labels[0]);
+            if (labels.length > 0) {
+              onChangeText(labels[0]);
+            }
           }}
           type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.on}
