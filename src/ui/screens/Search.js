@@ -7,7 +7,7 @@ import {Appbar, TextInput} from 'react-native-paper';
 import {Items} from './Items';
 import Camera from '../components/Camera';
 
-const Search = ({navigation, itemOnPress = null}) => {
+const Search = ({navigation, itemOnPress = null, containerOnly = false}) => {
   const isFocused = useIsFocused();
   const [textInputFocus, setTextInputFocus] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -54,6 +54,7 @@ const Search = ({navigation, itemOnPress = null}) => {
           searchLabel={searchText}
           exactMatch={!textInputFocus}
           itemOnPress={itemOnPress}
+          containerOnly={containerOnly}
         />
       </View>
     </View>

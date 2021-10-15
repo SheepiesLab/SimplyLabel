@@ -1,6 +1,6 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
-import {Appbar, List} from 'react-native-paper';
+import {ScrollView, View} from 'react-native';
+import {Appbar, List, Button} from 'react-native-paper';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -15,6 +15,9 @@ const Items = ({
   exactMatch = false,
   inContainer = '',
   itemOnPress = null,
+  containerOnly = false,
+  exclude = [],
+  deleteIcon = false,
 }) => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.items.entries);
@@ -60,7 +63,13 @@ const Items = ({
     if (searchLabel !== '' && exactMatch && itemLabel !== searchLabel) {
       continue;
     }
-    if (inContainer !== '' && items[k].inContainer !== inContainer) {
+    if (inContainer !== '' && items[k].container !== inContainer) {
+      continue;
+    }
+    if (containerOnly && !items[k].isContainer) {
+      continue;
+    }
+    if (exclude.includes(k)) {
       continue;
     }
     itemComponents.push(
@@ -69,6 +78,9 @@ const Items = ({
         title={items[k].name}
         description={items[k].label}
         onPress={itemOnPress(k)}
+        left={() => {
+          return deleteIcon ? <List.Icon icon="minus" color="red" /> : <View />;
+        }}
       />,
     );
   }

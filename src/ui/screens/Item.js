@@ -9,12 +9,14 @@ import {
   updateItem,
   setEditMode,
   deleteItem,
+  shadowItemRemoveContaining,
 } from '../../states/ItemsSlice';
 import {Items} from './Items';
 
 const Item = ({navigation, route}) => {
   const dispatch = useDispatch();
   const shadow = useSelector(state => state.items.entries.shadow);
+  const inContainerName = useSelector(state => state.items.shadowContainerName);
   const editMode = useSelector(state => state.items.itemScreenInEdit);
   const itemKey = route.params;
 
@@ -62,7 +64,7 @@ const Item = ({navigation, route}) => {
         editable={editMode}
       />
       <List.Item
-        title={shadow.container === '' ? 'Not In Container' : shadow.container}
+        title={shadow.container === '' ? 'Not In Container' : inContainerName}
         description="In Container"
         right={() => <List.Icon color="#000" icon="chevron-right" />}
         onPress={() => {
@@ -120,7 +122,16 @@ const Item = ({navigation, route}) => {
           <Divider />
         </View>
       )}
-      <Items inContainer={itemKey} />
+      {shadow.isContainer && <List.Subheader>Containing Items</List.Subheader>}
+      {shadow.isContainer && (
+        <Items
+          inContainer={itemKey}
+          deleteIcon={editMode}
+          itemOnPress={k => () => {
+            dispatch(shadowItemRemoveContaining(k));
+          }}
+        />
+      )}
     </ScrollView>
   );
 };
@@ -149,6 +160,7 @@ const ItemAppBar = ({navigation, route}) => {
             navigation.goBack();
             dispatch(deleteItem(itemKey));
           }}
+          color="red"
         />
       )}
       <Appbar.Content title={itemKey === 'shadow' ? 'Add Item' : item.name} />

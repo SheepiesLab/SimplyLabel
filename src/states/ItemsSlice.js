@@ -17,19 +17,29 @@ export const itemsSlice = createSlice({
     entries: {
       shadow: emptyShadow,
     },
+    shadowContainerName: '',
     shadowInContainerItemList: [],
   },
   reducers: {
     setShadowItem: (state, action) => {
       state.entries.shadow = action.payload;
+      if (state.entries.shadow.container !== '') {
+        state.shadowContainerName =
+          state.entries[state.entries.shadow.container].name;
+      }
     },
     shadowItem: (state, action) => {
       if (action.payload === 'shadow') {
         state.entries.shadow = emptyShadow;
         state.shadowInContainerItemList = [];
+        state.shadowContainerName = '';
       } else {
         state.entries.shadow = state.entries[action.payload];
         state.shadowInContainerItemList = [];
+        if (state.entries.shadow.container !== '') {
+          state.shadowContainerName =
+            state.entries[state.entries.shadow.container].name;
+        }
         for (const k in state.entries) {
           if (state.entries[k].container === action.payload) {
             state.shadowInContainerItemList.push(k);
@@ -51,6 +61,7 @@ export const itemsSlice = createSlice({
     emptyShadowItem: (state, action) => {
       state.entries.shadow = emptyShadow;
       state.shadowInContainerItemList = [];
+      state.shadowContainerName = '';
     },
     commitShadowItem: (state, action) => {
       const key = uuid();
@@ -59,8 +70,6 @@ export const itemsSlice = createSlice({
         const itemKey = state.shadowInContainerItemList[k];
         state.entries[itemKey].container = key;
       }
-      state.entries.shadow = emptyShadow;
-      state.shadowInContainerItemList = [];
     },
     updateItem: (state, action) => {
       const key = action.payload;
@@ -69,8 +78,6 @@ export const itemsSlice = createSlice({
         const itemKey = state.shadowInContainerItemList[k];
         state.entries[itemKey].container = key;
       }
-      state.entries.shadow = emptyShadow;
-      state.shadowInContainerItemList = [];
     },
     deleteItem: (state, action) => {
       delete state.entries[action.payload];
