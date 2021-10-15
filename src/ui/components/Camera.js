@@ -45,9 +45,38 @@ const Camera = ({onChangeText, isFocused}) => {
           style={styles.preview}
           captureAudio={false}
           onTextRecognized={({textBlocks}) => {
-            if (textBlocks.length > 0) {
-              onChangeText(JSON.stringify(textBlocks[0].value));
+            let labels = [];
+            for (const k in textBlocks) {
+              let a = false;
+              let b = false;
+              let thisString = '';
+              for (const c in textBlocks[k].value) {
+                if (textBlocks[k].value[c] === ':') {
+                  if (!a && !b) {
+                    a = true;
+                  } else if (a && !b) {
+                    b = true;
+                  } else if (a && b) {
+                    a = false;
+                  } else if (!a && b) {
+                    b = false;
+                    labels.push(thisString);
+                    thisString = '';
+                  }
+                } else {
+                  if (!a && !b) {
+                  } else if (a && !b) {
+                    a = false;
+                  } else if (a && b) {
+                    thisString += textBlocks[k].value[c];
+                  } else if (!a && b) {
+                    a = true;
+                    thisString += ':' + textBlocks[k].value[c];
+                  }
+                }
+              }
             }
+            onChangeText(labels[0]);
           }}
           type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.on}
