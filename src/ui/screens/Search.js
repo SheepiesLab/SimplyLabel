@@ -2,12 +2,12 @@
 import React, {useState} from 'react';
 import {View, InteractionManager} from 'react-native';
 import {useIsFocused, useFocusEffect} from '@react-navigation/core';
-import {Appbar, TextInput, Text} from 'react-native-paper';
+import {Appbar, TextInput} from 'react-native-paper';
 
 import {Items} from './Items';
 import Camera from '../components/Camera';
 
-const Search = ({navigation}) => {
+const Search = ({navigation, itemOnPress = null}) => {
   const isFocused = useIsFocused();
   const [textInputFocus, setTextInputFocus] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -53,6 +53,7 @@ const Search = ({navigation}) => {
           navigation={navigation}
           searchLabel={searchText}
           exactMatch={!textInputFocus}
+          itemOnPress={itemOnPress}
         />
       </View>
     </View>

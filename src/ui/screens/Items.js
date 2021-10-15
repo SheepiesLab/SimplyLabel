@@ -14,9 +14,18 @@ const Items = ({
   searchLabel = '',
   exactMatch = false,
   inContainer = '',
+  itemOnPress = null,
 }) => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.items.entries);
+  itemOnPress =
+    itemOnPress === null
+      ? k => () => {
+          dispatch(setEditMode(false));
+          dispatch(shadowItem(items[k]));
+          navigation.navigate('Item', k);
+        }
+      : itemOnPress;
   let itemComponents = [];
   for (const k in items) {
     if (k === 'shadow') {
@@ -58,11 +67,7 @@ const Items = ({
       <List.Item
         title={items[k].name}
         description={items[k].label}
-        onPress={() => {
-          dispatch(setEditMode(false));
-          dispatch(shadowItem(items[k]));
-          navigation.navigate('Item', k);
-        }}
+        onPress={itemOnPress(k)}
       />,
     );
   }

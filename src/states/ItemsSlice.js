@@ -8,7 +8,6 @@ const emptyShadow = {
   container: '',
   isVirtual: false,
   isContainer: false,
-  containing: [],
 };
 
 export const itemsSlice = createSlice({
@@ -23,6 +22,7 @@ export const itemsSlice = createSlice({
     shadowItem: (state, action) => {
       state.entries.shadow = action.payload;
     },
+    shadowItemAddContaining: (state, action) => {},
     emptyShadowItem: (state, action) => {
       state.entries.shadow = emptyShadow;
     },
@@ -43,6 +43,7 @@ export const itemsSlice = createSlice({
 
 export const {
   shadowItem,
+  shadowItemAddContaining,
   emptyShadowItem,
   commitShadowItem,
   updateItem,

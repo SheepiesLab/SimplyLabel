@@ -109,12 +109,11 @@ const Item = ({navigation, route}) => {
       {shadow.isContainer && editMode && (
         <View>
           <List.Item
-            title="Pack More Items"
-            description={shadow.containing.length}
+            title="Pack Item"
             right={() => <List.Icon color="#000" icon="chevron-right" />}
             onPress={() => {
               if (editMode) {
-                navigation.navigate('PackItems');
+                navigation.navigate('PackItem');
               }
             }}
           />
